@@ -1,42 +1,27 @@
-const express = require("express");
 const bodyParser = require("body-parser");
-
-
-// setting new app
+const express = require("express");
 
 const app = express();
+// require body-parser
 app.use(bodyParser.urlencoded({extended: true}));
-// building home route
 
+// creating new route
 app.get("/", function(req, res){
-    //res.send("Hello World!");
-    res.sendFile(__dirname + "/index.html");
-
+    res.sendFile(__dirname + "/calculator.html");
 });
 
-app.get("/bmicalculator", function(req, res){
-    res.sendFile(__dirname + "/bmiCalculator.html");
-});
-
+// creating post requst 
 app.post("/", function(req, res){
-    
-    var num1 = Number(req.body.num1);
-    var num2 = Number(req.body.num2);
-
-    var result = num1 + num2;
-
-    res.send("The result is: " + result);
+  var n1 = (req.body.n1);
+  var n2 = (req.body.n2);
+// convert string to number
+    n1 = (parseInt(n1));
+    n2 = (parseInt(n2));
+  var sum = n1 + n2;
+  res.send("The sum is: " + sum);
 });
 
-app.post("/bmicalculator", function(req, res){
-    var weight = parseFloat(req.body.weight);
-    var height = parseFloat(req.body.height);
-
-    var bmi = weight / (height * height);
-    res.send("Your BMI is: "  + bmi);
-})
-// building our server
-
+// creating our server
 app.listen(3000, function(){
-    console.log("Server is running on port 3000");
+    console.log("Server is running on port 3000!");
 });
